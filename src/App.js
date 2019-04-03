@@ -10,7 +10,7 @@ class App extends Component {
         <header id="title">
           <h1>Computer Vision API Demo</h1>
         </header>
-        <div id="subtitle">Upload an image and detect what's on it thanks to the Computer Vision API</div>
+        <div id="subtitle">Upload an image and detect what's on it with the Azure Computer Vision API</div>
         <ComputerVision/>
       </div>
     );

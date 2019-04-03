@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap.scss';
 $dark: #353535;
+$light:#cccccc;
 
 
 /* GENERAL */
@@ -21,7 +22,7 @@ code {
 }
 
 header{
-  background-color:#cccccc;
+  background-color:$light;
   padding:20px;
 }
 
@@ -68,11 +69,6 @@ header{
   position: relative;
 }
 
-#info{
-  border: 2px solid $dark;
-  height: 65vh;
-}
-
 #imgFile{
   max-width:100%;
   max-height:100%;
@@ -82,4 +78,53 @@ header{
   left: 0;  
   right: 0;  
   margin: auto;
+}
+
+/* INFO */
+
+
+#tagsList{
+  align-items:center;
+}
+
+
+.tag{
+  padding: 2px 5px;
+  background-color: $dark;
+  border-radius:3px;
+  margin: 10px;
+  width:fit-content;
+  color:white;
+  margin-left:50%;
+  transform:translate(-50%,0);
+}
+
+.scrollbar
+{
+  border: 2px solid $dark;
+  height: 65vh;
+
+    float: right;
+    background: #F5F5F5;
+    overflow-y: scroll;
+}
+
+.scrollbar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px #d7d7d7;
+    border-radius: 10px;
+    background-color:$white;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: $light;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #d7d7d7;
+    background-color: $dark;
 }

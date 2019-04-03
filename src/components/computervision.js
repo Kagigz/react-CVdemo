@@ -29,7 +29,7 @@ class ComputerVision extends React.Component{
                 <div className="col-md-9">
                     <ImageView imgURL={this.state.imgURL}/>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 scrollbar">
                     <Info/>
                 </div>
             </div>
