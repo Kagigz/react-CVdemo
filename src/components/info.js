@@ -12,9 +12,6 @@ class Info extends React.Component{
           captions: [ { "text": "a black and white photo of a city", "confidence": 0.958241045 } ],
           keywords: [ { "name": "sky", "confidence": 0.998601139 }, { "name": "outdoor", "confidence": 0.9967468 }, { "name": "city", "confidence": 0.9352678 }, { "name": "white", "confidence": 0.728594542 }, { "name": "skyscraper", "confidence": 0.233053252 }, { "name": "skyline", "confidence": 0.233053252 }, { "name": "black and white", "confidence": 0.1251363 }, { "name": "building", "confidence": 0.09543502 }, { "name": "cityscape", "confidence": 0.0435244031 }, { "name": "downtown", "confidence": 0.0275768377 } ],
           categories: [ { "name": "building_", "score": 0.2734375 }, { "name": "building_street", "score": 0.26171875 }, { "name": "outdoor_city", "score": 0.2578125 } ],
-          bgColor: "white",
-          frontColor: "grey",
-          accentColor: "#303030"
         };
       }
 
@@ -22,37 +19,34 @@ class Info extends React.Component{
     render(){
         const tagsList = this.state.tags
             .map(tag => <div className="tag">{tag}</div> );
-        const captions = ""
-        const keywords = ""
-        const categories = ""
-        const colors = ""
+        const captions = this.state.captions
+            .map(item => <NameConfidence key={item.id} name={item.text} confidence={item.confidence}/>);
+        const keywords = this.state.keywords
+        .map(item => <NameConfidence key={item.id} name={item.name} confidence={item.confidence}/>);
+        const categories = this.state.categories
+        .map(item => <NameConfidence key={item.id} name={item.name} confidence={item.score}/>);
         return (
             <div id="info">
                 <h3 id="infoTitle">Info</h3>
 
-                <h4>Tags</h4>
-                <div id="tagsList">
-                    {tagsList}
-                </div>
-
+                <div className="infoSection" id="captions">
                 <h4>Captions</h4>
-                <div id="captions">
                     {captions}
                 </div>
 
+                <div className="infoSection" id="keywords">
                 <h4>Keywords</h4>
-                <div id="keywords">
                     {keywords}
                 </div>
-
+    
+                <div className="infoSection" id="categories">
                 <h4>Categories</h4>
-                <div id="categories">
                     {categories}
                 </div>
 
-                <h4>Colors</h4>
-                <div id="cplors">
-                    {colors}
+                <div className="infoSection" id="tagsList">
+                <h4>Tags</h4>
+                    {tagsList}
                 </div>
 
             </div>

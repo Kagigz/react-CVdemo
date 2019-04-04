@@ -1,5 +1,6 @@
 import React from 'react';
 import FilePicker from './filepicker';
+import UrlUpload from './urlupload';
 import ImageView from './imageView';
 import Info from './info';
 
@@ -21,10 +22,15 @@ class ComputerVision extends React.Component{
         allFiles.forEach(f => f.remove())
     }
 
+    handleOK = (url) => {
+        this.setState({imgURL:url});
+    }
+
     render(){
         return (
         <div className="container" id="main">
             <FilePicker handleSubmit={this.handleSubmit}/>
+            <UrlUpload handleOK={this.handleOK}/>
             <div className="row" id="imageAnalysis">
                 <div className="col-md-9">
                     <ImageView imgURL={this.state.imgURL}/>

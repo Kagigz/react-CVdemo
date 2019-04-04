@@ -11,13 +11,19 @@ class NameConfidence extends React.Component{
         };
       }
 
+    componentWillMount(){
+      this.setState({name:this.props.name});
+      this.setState({confidence:Math.floor(this.props.confidence*100)});
+    }
 
     render(){
-
+        const progressStyle="width:"+this.state.confidence+"%;"
         return (
             <div className="nameConfidence">
-                {this.state.name}
-                {this.state.confidence}
+                <div className="nameConfidenceTitle">{this.state.name}</div>
+                <div className="progress">
+                  <div className="progress-bar" role="progressbar" style={{width: this.state.confidence + '%'}} aria-valuenow={this.state.confidence} aria-valuemin="0" aria-valuemax="100">{this.state.confidence}%</div>
+                </div>
             </div>
         )
     }
