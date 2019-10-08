@@ -5,13 +5,15 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
+    "mocha": "^6.2.1",
     "node-sass": "^4.11.0",
     "popper.js": "^1.14.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone-uploader": "^2.7.0",
     "react-scripts": "2.1.8",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +29,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "dotenv": "^8.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0"
+  }
 }

@@ -13,11 +13,10 @@ class NameConfidence extends React.Component{
 
     componentWillMount(){
       this.setState({name:this.props.name});
-      this.setState({confidence:Math.floor(this.props.confidence*100)});
+      this.setState({confidence:Math.round(this.props.confidence*100)});
     }
 
     render(){
-        const progressStyle="width:"+this.state.confidence+"%;"
         return (
             <div className="nameConfidence">
                 <div className="nameConfidenceTitle">{this.state.name}</div>

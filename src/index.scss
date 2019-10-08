@@ -59,7 +59,8 @@ header{
 /* URL UPLOAD */
 
 #urlUpload{
-  margin-top:10px;
+  margin-top:5vh;
+  width:100%;
   box-shadow: 0px 2px 3px 0px #666666;
 }
 
@@ -87,7 +88,11 @@ header{
 /* IMAGE ANALYSIS */
 
 #imageAnalysis{
-  margin-top:20px;
+  margin-top:4vh;
+}
+
+#imageViewWrapper{
+  padding:0;
 }
 
 #imageView{
@@ -171,4 +176,49 @@ header{
 .progress-bar{
   background-color:$dark;
   height:16px;
+}
+
+/* CUSTOM VISION */
+
+#customVision{
+  margin-top: 2.5vh;
+  overflow:visible;
+  white-space: nowrap;
+  background-color:$dark;
+  color:white;
+  box-shadow: 0px 2px 3px 0px #666666;
+  padding:10px;
+}
+
+.prediction{
+  background-color:$light;
+  color:$dark;
+  width:fit-content;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin: 0px 7px;
+  overflow:hidden;
+}
+
+.predictionTitle{
+  font-weight:500;
+}
+
+.seeResults{
+  margin-top:30px;
+}
+
+.seeResultsBtn{
+  background-color:$dark;
+  color:$light;
+  border-radius: 0;
+}
+
+.seeResultsBtn:hover{
+  color:white;
+}
+
+.hideResultsBtn{
+  background-color:$light;
+  border-radius: 0;
 }

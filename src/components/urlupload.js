@@ -13,9 +13,9 @@ class UrlUpload extends React.Component{
     render(){
         return (
             <div id="urlUpload" className="input-group">
-                <input type="text" ref="urlInput" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+                <input type="text" ref="urlInput" className="form-control" placeholder="Image URL" aria-label="imageUrl"/>
                 <div className="input-group-append">
-                <button onClick={ () => this.props.handleOK(this.refs.urlInput.value)} className="input-group-text" id="basic-addon1">OK</button>
+                <button onClick={ () => this.props.handleOK(this.refs.urlInput.value)} className="input-group-text">OK</button>
                 </div>
             </div>
         )

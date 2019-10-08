@@ -1,12 +1,10 @@
 import React from 'react';
-import FilePicker from './filepicker';
 import UrlUpload from './urlupload';
 import ImageView from './imageView';
 import Info from './info';
+import CustomVision from './customvision'
 
 const request = require('request');
-const subscriptionKey = '';
-const uriBase = 'https://westeurope.api.cognitive.microsoft.com/vision/v2.0/analyze';
 
 class ComputerVision extends React.Component{
 
@@ -15,12 +13,22 @@ class ComputerVision extends React.Component{
         super(props);
     
         this.state = {
-          imgURL:null
+          imgURL:null,
+          seeCustomResults:false,
+          captions:[],
+          keywords:[],
+          categories:[],
+          tags:[],
+          customPredictions:[]
         };
-         
+        
+        this.computerVisionKey = process.env.REACT_APP_COMPUTER_VISION_KEY;
+        this.computerVisionURI = `https://${process.env.REACT_APP_COMPUTER_VISION_REGION}.api.cognitive.microsoft.com/vision/v2.0/analyze`;
+        this.customVisionKey = process.env.REACT_APP_CUSTOM_VISION_KEY;
+        this.customVisionEndpoint = `https://${process.env.REACT_APP_CUSTOM_VISION_REGION}.api.cognitive.microsoft.com/customvision/v3.0/Prediction/${process.env.REACT_APP_CUSTOM_VISION_PROJECTID}/classify/iterations/Iteration1/url`;
       }
 
-    makeRequest = (imageURL) => {
+    getInfo = (content,contentType) => {
 
         const params = {
             'visualFeatures': 'Categories,Description,Tags',
@@ -29,12 +37,12 @@ class ComputerVision extends React.Component{
         };
         
         const options = {
-            uri: uriBase,
+            uri: this.computerVisionURI,
             qs: params,
-            body: '{"url": ' + '"' + imageURL + '"}',
+            body:content,
             headers: {
-                'Content-Type': 'application/json',
-                'Ocp-Apim-Subscription-Key' : subscriptionKey
+                'Content-Type': contentType,
+                'Ocp-Apim-Subscription-Key' : this.computerVisionKey
             }
         };
         
@@ -43,40 +51,101 @@ class ComputerVision extends React.Component{
             console.log('Error: ', error);
             return;
           }
+
           let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
           console.log('JSON Response\n');
           console.log(jsonResponse);
+
+          try{
+            let result = JSON.parse(jsonResponse);
+            let description = result['description']
+            let captions = description['captions'];
+            let categories = result['categories'];
+            let keywords = result['tags'];
+            let tags = description['tags'];
+            this.setState({captions});
+            this.setState({categories});
+            this.setState({keywords});
+            this.setState({tags});
+          }
+          catch(e){
+              console.log(e);
+          }
+
+        });
+
+    }
+
+    getCustomTags = (content) => {
+
+        const options = {
+            uri: this.customVisionEndpoint,
+            body:content,
+            headers: {
+                'Content-Type': 'application/json',
+                'Prediction-Key' : this.customVisionKey
+            }
+        };
+        
+        request.post(options, (error, response, body) => {
+          if (error) {
+            console.log('Error: ', error);
+            return;
+          }
+
+          let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
+          console.log('JSON Custom Response\n');
+          console.log(jsonResponse);
+
+          try{
+            let result = JSON.parse(jsonResponse);
+            let customPredictions = result["predictions"];
+            this.setState({customPredictions});
+          }
+          catch(e){
+              console.log(e);
+          }
         });
 
     }
     
-    handleSubmit = (files, allFiles) => {
-        URL.revokeObjectURL(this.state.imgURL);
-        let newImg = URL.createObjectURL(files[0].file);
-        this.setState({imgURL:newImg});
-        console.log(newImg);
-        this.makeRequest(newImg);
-        allFiles.forEach(f => f.remove())
-    }
-
     handleOK = (url) => {
         this.setState({imgURL:url});
-        this.makeRequest(url);
+        let jsonContent =  '{"url": ' + '"' + url + '"}';
+        this.getInfo(jsonContent,'application/json');
+        this.getCustomTags(jsonContent);
+        
+    }
+
+    toggleCustomResults = () => {
+      this.setState({seeCustomResults:!this.state.seeCustomResults});
     }
 
     render(){
+
+        let customResults;
+
+        if(this.state.seeCustomResults){
+          customResults = <CustomVision predictions={this.state.customPredictions} toggle={this.toggleCustomResults}/>
+        }
+        else{
+          customResults = <div className="seeResults"><button onClick={this.toggleCustomResults} className="btn seeResultsBtn">See custom results</button></div>
+        }
+
         return (
         <div className="container" id="main">
-            <FilePicker handleSubmit={this.handleSubmit}/>
             <UrlUpload handleOK={this.handleOK}/>
             <div className="row" id="imageAnalysis">
-                <div className="col-md-9">
+                <div className="col-md-9" id="imageViewWrapper">
                     <ImageView imgURL={this.state.imgURL}/>
                 </div>
                 <div className="col-md-3 scrollbar">
-                    <Info/>
+                    <Info captions={this.state.captions} keywords={this.state.keywords} categories={this.state.categories} tags={this.state.tags}/>
                 </div>
             </div>
+
+          {customResults}
+
         </div>
         )
     }
