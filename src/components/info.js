@@ -7,19 +7,6 @@ class Info extends React.Component{
     
     constructor(props) {    
         super(props);
-        this.state = {
-          tags: [],
-          captions: [],
-          keywords: [],
-          categories: [],
-        };
-      }
-
-      componentWillReceiveProps(){
-          this.setState({tags:this.props.tags});
-          this.setState({captions:this.props.captions});
-          this.setState({keywords:this.props.keywords});
-          this.setState({categories:this.props.categories});
       }
 
     render(){
@@ -29,13 +16,13 @@ class Info extends React.Component{
         var categories = "";
         
         try{
-        captions = this.state.captions
+        captions = this.props.captions
             .map(item => <NameConfidence key={uuid()} name={item.text} confidence={item.confidence}/>);
-        keywords = this.state.keywords
+        keywords = this.props.keywords
             .map(item => <NameConfidence key={uuid()} name={item.name} confidence={item.confidence}/>);
-        categories = this.state.categories
+        categories = this.props.categories
             .map(item => <NameConfidence key={uuid()} name={item.name} confidence={item.score}/>);
-        tagsList = this.state.tags
+        tagsList = this.props.tags
             .map(tag => <div key={uuid()} className="tag">{tag}</div> );
         }
         catch(e){

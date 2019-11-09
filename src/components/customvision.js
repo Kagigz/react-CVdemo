@@ -7,21 +7,14 @@ class CustomVision extends React.Component{
     
     constructor(props) {    
         super(props);
-        this.state = {
-          predictions: []
-        };
       }
-
-    componentWillReceiveProps(){
-        this.setState({predictions:this.props.predictions});
-    }
 
     render(){
 
         var predictions = "";
         
         try{
-        predictions = this.state.predictions
+        predictions = this.props.predictions
             .map(item => <Prediction key={uuid()} tag={item.tagName} confidence={item.probability}/>);
         }
         catch(e){
