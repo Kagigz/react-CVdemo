@@ -2,6 +2,8 @@
 
 This ReactJS web app is a demo of the [Azure Computer Vision API](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/) and [Custom Vision service](https://www.customvision.ai/).
 
+![Screenshot of the web app](screenshot_cvdemo.jpg)
+
 ## How to use
 
 ### Create a Computer Vision Resource
