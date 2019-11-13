@@ -41,4 +41,17 @@ REACT_APP_CUSTOM_VISION_PROJECTID="<YOUR CUSTOM VISION PROJECT ID>"
 Replace the values with your own subscription and prediction keys as well as the regions you selected when you created the resources. Your Custom Vision Project ID can be found in the settings panel of your project in the Custom Vision portal.
 - run `yarn start` or `npm start` to start the project
 
-You can now test the services with links to the images of your choice :)
+### Test
+
+#### Computer Vision API
+
+Take the URL of any image on the web (you can go to Google Images and do a right click > Copy Image URL) and paste it in the URL field, then click on OK.
+If there were no errors (which can occur when the size of the image is too big for instance), the results will appear in the *Info* panel within a few seconds.
+
+#### Custom Vision Service
+
+If you've used the training images provided in this repo, you can test your custom vision model using the following images, which were not used for training: 
+- Kfet4: https://i.imgur.com/RuN1ETS.jpg
+- Kfet5: https://i.imgur.com/uTAGS71.jpg
+- Kfet6: https://i.imgur.com/zjhD9ot.jpg
+- Kfet7: https://i.imgur.com/LpJFxdB.jpg
